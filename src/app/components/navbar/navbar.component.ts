@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Book } from 'src/app/interfaces/Book.interface';
+import { BookService } from 'src/app/services/book.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  total: number = 0
+  generalTotal: number = 0
+
+  constructor(public bookService: BookService) { }
 
   ngOnInit(): void {
+    this.bookService.getMyList()
+      .subscribe((data: Book[]) => this.total = data.length);
+    this.bookService.getBooks()
+      .subscribe((data: Book[]) => this.generalTotal = data.length);
   }
 
 }

@@ -13,6 +13,6 @@ export class AppComponent implements OnInit  {
   constructor(public bookServece: BookService) {}
   
   ngOnInit(): void {
-    this.bookServece.getBooks();
+    this.bookServece.fetchBooks();
   }
 }

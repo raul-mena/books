@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BookApiResponse } from 'src/app/interfaces/Book.interface';
+import { Book, BookApiResponse } from 'src/app/interfaces/Book.interface';
 import { BookService } from 'src/app/services/book.service';
 
 @Component({
@@ -9,10 +9,15 @@ import { BookService } from 'src/app/services/book.service';
   styleUrls: ['./book-list.component.scss']
 })
 export class BookListComponent implements OnInit {
-  allData$!: Observable<BookApiResponse>;
+  
+  fullList: Book[] = [];
 
-  constructor(public bookService: BookService) { }
+  constructor(public bookService: BookService) {
+    this.fullList = this.bookService.generalList;
+   }
 
   ngOnInit(): void {
+    this.bookService.getBooks()
+      .subscribe((data: Book[]) => this.fullList = data);
   }
 }

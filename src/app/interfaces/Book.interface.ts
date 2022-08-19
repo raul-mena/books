@@ -3,11 +3,12 @@ import { Author } from "./Author.interface";
 export interface Book {
     id: number;
     title: string;
-    author: Author[];
+    authors: Author[];
     languages: string[];
     formats: {
         'image/jpeg': string
-    }
+    },
+    subjects: string[];
 }
 
 export interface BookApiResponse {

@@ -1,1 +1,5 @@
-<p>my-list works!</p>
+<div class="flex-countainer">
+    <div class="book-countainer" *ngFor="let book of myList">
+        <app-book [data]="book" [isInMyList]="true"></app-book>
+    </div>
+</div>
