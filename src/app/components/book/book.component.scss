@@ -6,3 +6,17 @@
 .height-105 {
     height: 105px;
 }
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-container {
+    padding: 10px;
+    img {
+        width: 150px;
+        height: 200px;
+    }
+}

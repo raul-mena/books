@@ -9,7 +9,16 @@ import { BookService } from 'src/app/services/book.service';
 })
 export class BookComponent {
 
-  @Input() data!: Book;
+  @Input() data: Book = {
+    title: '',
+    authors: [],
+    subjects: [],
+    id: 0,
+    languages: [],
+    formats: {
+      'image/jpeg': ''
+    }
+  };
   @Input() isInMyList: boolean = false;
   
   constructor(public bookService: BookService) { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { Book } from 'src/app/interfaces/Book.interface';
 import { BookService } from 'src/app/services/book.service';
 
@@ -8,6 +9,7 @@ import { BookService } from 'src/app/services/book.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  private subscriptions = new Subscription();
 
   total: number = 0
   generalTotal: number = 0
@@ -15,10 +17,17 @@ export class NavbarComponent implements OnInit {
   constructor(public bookService: BookService) { }
 
   ngOnInit(): void {
-    this.bookService.getMyList()
-      .subscribe((data: Book[]) => this.total = data.length);
-    this.bookService.getBooks()
-      .subscribe((data: Book[]) => this.generalTotal = data.length);
+    this.subscriptions.add(
+      this.bookService.getMyListObservable()
+        .subscribe((data: Book[]) => this.total = data.length)
+    );
+    this.subscriptions.add(
+      this.bookService.getBooksObservable()
+        .subscribe((data: Book[]) => this.generalTotal = data.length)
+    )
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe()
+  }
 }

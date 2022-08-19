@@ -13,13 +13,17 @@ export class BookService {
   private url: string = 'https://gutendex.com/books/?page=';
 
   // inital state
-  generalList: Book[] = []
+  private generalList: Book[] = []
 
   // inital state
-  myList: Book[] = []
+  private myList: Book[] = []
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * 
+   * @param page fetch to api and get response, let page param in case needs paginate to get more rows
+   */
   fetchBooks(page: number = 1): void {
     this.http.get<BookApiResponse>(`${this.url}${page}`)
       .subscribe(({results, count}) => {
@@ -30,46 +34,46 @@ export class BookService {
 
   /**
    * 
-   * @returns 
+   * @returns observable to subscribe and get general book list updates
    */
-  getBooks(): Observable<Book[]> {
+  getBooksObservable(): Observable<Book[]> {
     return this.genelaListSubject.asObservable();
   }
 
   /**
    * 
-   * @returns 
+   * @returns observable to subscribe and get my list updates
    */
-  getMyList(): Observable<Book[]> {
+  getMyListObservable(): Observable<Book[]> {
     return this.myListSubject.asObservable();
   }
 
   /**
    * 
-   * @param book 
+   * @param book Remove book object from general book list and add it to my list
    */
   addToMyList(book: Book): void {
     const index = this.generalList.findIndex(item => item.id === book.id);
     this.myList.push(this.generalList[index]);
     this.generalList.splice(index, 1);
-    this.updateLists();
+    this.refreshData();
   }
 
   /**
    * 
-   * @param book 
+   * @param book Remove book object from my list and add it to general book list
    */
   removeFromMyList(book: Book): void {
     const index = this.myList.findIndex(item => item.id === book.id);
     this.generalList.push(this.myList[index]);
     this.myList.splice(index, 1);
-    this.updateLists();
+    this.refreshData();
   }
 
   /**
-   * 
+   * trigger subscribe fucntions on the components
    */
-  private updateLists(): void {
+  refreshData(): void {
     this.genelaListSubject.next(this.generalList);
     this.myListSubject.next(this.myList);
   }

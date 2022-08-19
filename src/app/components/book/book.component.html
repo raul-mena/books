@@ -1,17 +1,17 @@
 <mat-card class="example-card">
     <mat-card-title-group class="height-105">
       <mat-card-title>
-        <div >
+        <div>
           {{ (data.title.length > 30)? (data.title | slice:0:30)+'...':(data.title) }}
         </div>
       </mat-card-title>
       <mat-card-subtitle *ngFor="let author of data.authors">{{author.name}}</mat-card-subtitle>
-      <img mat-card-sm-image [src]="data.formats['image/jpeg']" >
     </mat-card-title-group>
-    <mat-card-content class="subject-content">
-        <p *ngFor="let subject of data.subjects">{{subject}}</p>
-    </mat-card-content>
-    <mat-card-content>
-      <mat-checkbox (change)="handleChange()">{{isInMyList ? 'Remove from' : 'Aad to'}} my list</mat-checkbox>
+    <div class="flex-center img-container">
+      <img mat-card-sm-image [src]="data.formats['image/jpeg']" >
+    </div>
+    <mat-card-content class="flex-center">
+      <button *ngIf="!isInMyList" mat-button (click)="handleChange()" color="primary">Add to My List</button>
+      <button *ngIf="isInMyList" mat-button (click)="handleChange()" color="warn">Remove from My List</button>
     </mat-card-content>
 </mat-card>

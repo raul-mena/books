@@ -1,4 +1,5 @@
 <div class="flex-countainer">
+    <label *ngIf="!myList.length">No items</label>
     <div class="book-countainer" *ngFor="let book of myList">
         <app-book [data]="book" [isInMyList]="true"></app-book>
     </div>

@@ -1,16 +1,23 @@
+import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { BookService } from './services/book.service';
+import { mockBookService } from './services/book.service.spec';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientModule
       ],
       declarations: [
         AppComponent
       ],
+      providers: [{
+        provider: BookService, useValue: mockBookService
+      }]
     }).compileComponents();
   });
 
@@ -26,10 +33,11 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('books');
   });
 
-  it('should render title', () => {
+  it(`should run ngOninit`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('books app is running!');
+    const app = fixture.componentInstance;
+    spyOn(app.bookServece, 'fetchBooks')
+    app.ngOnInit()
+    expect(app.bookServece.fetchBooks).toHaveBeenCalled();
   });
 });

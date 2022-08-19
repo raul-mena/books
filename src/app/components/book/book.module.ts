@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookComponent } from './book.component';
 import { MatCardModule } from '@angular/material/card';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -11,7 +11,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   imports: [
     CommonModule,
     MatCardModule,
-    MatCheckboxModule
+    MatButtonModule
   ],
   exports: [
     BookComponent

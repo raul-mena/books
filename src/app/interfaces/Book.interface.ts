@@ -1,5 +1,8 @@
 import { Author } from "./Author.interface";
 
+/**
+ * represent book object
+ */
 export interface Book {
     id: number;
     title: string;
@@ -11,6 +14,9 @@ export interface Book {
     subjects: string[];
 }
 
+/**
+ * Represent api respons
+ */
 export interface BookApiResponse {
     count: number;
     results: any[];
