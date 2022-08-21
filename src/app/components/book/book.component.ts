@@ -8,7 +8,9 @@ import { BookService } from 'src/app/services/book.service';
   styleUrls: ['./book.component.scss']
 })
 export class BookComponent {
-
+  /**
+   * required information to print book card
+   */
   @Input() data: Book = {
     title: '',
     authors: [],
@@ -19,6 +21,9 @@ export class BookComponent {
       'image/jpeg': ''
     }
   };
+  /**
+   * flag to check to defaine action on the button
+   */
   @Input() isInMyList: boolean = false;
   
   constructor(public bookService: BookService) { }

@@ -11,6 +11,9 @@ import { BookService } from 'src/app/services/book.service';
 export class NavbarComponent implements OnInit {
   private subscriptions = new Subscription();
 
+  /**
+   * define counter indicators
+   */
   total: number = 0
   generalTotal: number = 0
 
@@ -27,6 +30,9 @@ export class NavbarComponent implements OnInit {
     )
   }
 
+  /**
+   * unsubscribe to avoid Memory Leak
+   */
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe()
   }
