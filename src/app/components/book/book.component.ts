@@ -19,7 +19,8 @@ export class BookComponent {
     languages: [],
     formats: {
       'image/jpeg': ''
-    }
+    },
+    status: true
   };
   /**
    * flag to check to defaine action on the button

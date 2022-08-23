@@ -12,6 +12,7 @@ export interface Book {
         'image/jpeg': string
     },
     subjects: string[];
+    status: boolean;
 }
 
 /**

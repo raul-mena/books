@@ -27,7 +27,7 @@ export class BookService {
   fetchBooks(page: number = 1): void {
     this.http.get<BookApiResponse>(`${this.url}${page}`)
       .subscribe(({results, count}) => {
-        this.generalList = results
+        this.generalList = results.map(book => ({...book, status: true}))
         this.genelaListSubject.next(results);
       }, error => {})
   }
@@ -76,5 +76,14 @@ export class BookService {
   refreshData(): void {
     this.genelaListSubject.next(this.generalList);
     this.myListSubject.next(this.myList);
+  }
+
+  /**
+   * 
+   * @param book add new book and update the list
+   */
+  addToGeneralList(book: Book) {
+    this.generalList.push(book);
+    this.genelaListSubject.next(this.generalList);
   }
 }

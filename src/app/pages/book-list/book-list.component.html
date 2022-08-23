@@ -1,3 +1,6 @@
+<div class="flex-countainer center-content">
+    <button mat-raised-button color="primary" (click)="openDialog()">Add book</button>
+</div>
 <div class="flex-countainer">
     <div class="book-countainer" *ngFor="let book of fullList">
         <app-book [data]="book"></app-book>

@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>New Book</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit(bookForm)">
+        <p>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Title</mat-label>
+                <input matInput name="title" formControlName="title">
+            </mat-form-field>
+        </p>
+        <div class="flex-countainer">
+            <span>Authors</span>
+            <div class="float-right">
+                <button mat-raised-button color="primary" type="button" (click)="addNewAuthor()">Add Other Author</button>
+            </div>
+        </div>
+        <div formArrayName="authors">
+            <div *ngFor="let author of authors.controls; let i=index">
+            <div [formGroupName]="i">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+                <button mat-raised-button color="warn" type="button" (click)="removeAuthor(i)">Remove</button>
+            </div>
+            </div>
+        </div>
+          
+        <button mat-raised-button color="primary" type="submit">Save</button>
+    </form>
+</div>
