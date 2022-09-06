@@ -8,7 +8,7 @@ import { BookService } from 'src/app/services/book.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
 
   /**
